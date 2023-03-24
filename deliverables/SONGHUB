@@ -1,0 +1,36 @@
+SONGHUB
+
+BD:
+	register: see if the email is unique if yes register; transaction
+	login: select
+	add song: insert transaction
+	add album: Transaction
+	search song: select
+	detail artist: select
+	subscribe premium: transaction
+	create playlist: transaction
+	play song: transaction
+	generate cards: insert  transaction
+	comment: insert  transaction
+	generate report: select
+
+insert examples: 
+	register
+	add song
+	add album
+	susbscribe to premium
+	create playlist
+	generate cards
+	coment
+update:
+	update songs views
+	update card ballance
+	update top 10 playlists
+deletes:
+	no deletes will be used to create the required endpoints
+
+Every operation done to the database should be realized using transaction, 
+this is specially this is specially true for the add album operation, which can create new songs, in the case the operation fails these songs should not be created, other relevant use is in the case of the subscribe to premium enpoint, where the transactions are needed to maintain the database integrity.
+
+Possible concurrency conflicts:
+	There might be concurrency problems when there is at least one write operation happening simultaniously whith another operation on the same record. Therefore concurrency concflicts could happen for example whenever two users are being registerd at the same time, or when two users are subscribing to premium at the same time. One other example would be the the creation of a song and an album, or a two songs at the same time. 
