@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "f9c51062-0149-44d5-ae39-16967283f00a",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21921142"
+	},
+	"item": [
+		{
+			"name": "Add_artists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"ol1i1111111\",\n    \"email\":\"emai11111111e\",\n    \"password\":\"ola\",\n    \"cc\": \"ola\",\n    \"name\": \"name\",\n    \"phone\":\"12345\",\n    \"address\": \"Rua fixe\",\n    \"zip_code\": \"3030-123\",\n    \"city\": \"A city\",\n    \"artistic_name\": \"roberto\",\n    \"publisher_id\": \"12\",\n    \"admin_id\": \"12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_consumer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CONSUMER1\",\n    \"email\":\"CONSUMER1@gmail.com\",\n    \"password\":\"password\",\n    \"cc\": \"CONSUMER1\",\n    \"name\": \"CONSUMER1 NPC\",\n    \"phone\":\"961234568\",\n    \"address\": \"Rua fixe\",\n    \"zip_code\": \"3030-123\",\n    \"city\": \"DUBAI do Burkinafaso\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im9sYSIsImV4cCI6MTY4NDI2NjM1NH0.I-_NAXKyvZAyNYekHKEnq3GVj3Sv5Igg0kNuBg2GFe8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CONSUMER1\",\n    \"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_song",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mywicm9sZSI6IkFSVElTVCIsImV4cCI6MTY4NDI3MzM4NX0.8fRbKxRei4eoGH-i-RDyi3HLKPKHT6y3XaV61Ekx2P8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"song_name\": \"SONG1\",\n    \"publisher_id\":\"1\",\n    \"genre\":\"COOL\",\n    \"duration\": \"10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/song/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"song",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_album",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Miwicm9sZSI6IkFSVElTVCIsImV4cCI6MTY4NDUxMTY2MH0.gsZj9OLFbGD7wzF7WRL_wErCN3m_oNcPI-zHPxLeWdo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"album_name\": \"ALBUM1\",\n    \"publisher_id\": \"1\",\n    \"release_date\": \"2023-05-17\",\n    \"songs\": [\n        \"1\",\n        \"2\",\n        {\n        \"song_name\": \"SONG2\",\n        \"publisher_id\":\"1\",\n        \"genre\":\"COOL\",\n        // \"release_date\":\"2023-05-17\",\n        \"duration\": \"10\"\n        // \"other_artists\":[3]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/album/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"album",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_song",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mywicm9sZSI6IkFSVElTVCIsImV4cCI6MTY4NDMyNDU1NH0.wtJzY3oXgDwvvEbUVom8_aOqnEyRSO7QzYD4hhOy8uE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/album/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"album",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_artist",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Miwicm9sZSI6IkFSVElTVCIsImV4cCI6MTY4NDUzMDQ4Mn0.WEezQRaD30JVnofIkLH8uSbxgbfhWPZLvgMuMie27Ug",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/artist_info/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"artist_info",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_cards",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwicm9sZSI6IkFETUlOIiwiZXhwIjoxNjg0MzY2MTQ5fQ.v-5jrK5oFIDs6G588fSEBJcRAVwlH1ULFOXu6jW4eYM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"number_cards\":\"9\",\n    \"card_price\": \"10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/card/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"card",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_comment",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwicm9sZSI6IkFETUlOIiwiZXhwIjoxNjg0MzY4MzM5fQ.S7TbSlTmdsrD4vv3vXGpkwzBn1GqDNWiLym3z86xrcM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\": \"NAO ES BUE FEIA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/comments/1/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comments",
+						"1",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_sub",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Nywicm9sZSI6IkNPU1RVTUVSIiwiZXhwIjoxNjg0NTIxMzI5fQ.Wjdw7rq9GmcN8LOkpPzCoofxK0qg2RM2PpPazj_FYQY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"period\":\"MONTH\",\n    \"cards\": [\"h1fm4MyAofnHsVTp\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/subscription/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"subscription",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_playlist",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwicm9sZSI6IkNPU1RVTUVSIiwiZXhwIjoxNjg0NTExNzYwfQ.o4q-Kk9MuTYnrp9iq9zwgW_Yc_ThZCv2o5bv2LT47bM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"playlist_name\": \"PLAYLIST4\",\n    \"visibility\": \"private\",\n    \"songs\":[1]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/playlist/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"playlist",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listen_song",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwicm9sZSI6IkNPU1RVTUVSIiwiZXhwIjoxNjg0NDk0MDc1fQ.udHWGds4pGGKMfPQNt5qkXHKLwEGqOiMxHqd3Ve9fSs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwicm9sZSI6IkNPU1RVTUVSIiwiZXhwIjoxNjg0NDk5MDc0fQ.szXylrvW06zHOOghYYM146dg3G3pTRRDkSXW33W1Gxo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/report/202305",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report",
+						"202305"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

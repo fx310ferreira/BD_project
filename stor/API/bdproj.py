@@ -347,7 +347,7 @@ def find_song(id, role, keyword):
     conn = db_connection()
     cur = conn.cursor()
 
-
+    
     try:
         statement = f'''SELECT song.title, song.genre, song.duration ,song.publisher_id, 
                             array_agg(distinct artist.artistic_name) FILTER (WHERE song_feat.artist_id IS NOT NULL) as artists , 
@@ -390,7 +390,7 @@ def find_user(id, role, artist_id):
     conn = db_connection()
     cur = conn.cursor()
     
-    try:
+    try: # TODO CHANGE TO ONLY PUBLIC PLAYLISTS
         statement = f'''SELECT artist.artistic_name, artist.publisher_id ,
                             array_agg(DISTINCT song_feat.song_ismn) FILTER (WHERE song_feat.song_ismn IS NOT NULL) as songs,
                             array_agg(DISTINCT album_song_order.album_id) FILTER (WHERE album_song_order.album_id IS NOT NULL) as albums,
@@ -494,6 +494,129 @@ def add_comment(id, role, song_id, parent_comment_id):
         response = cur.fetchone()[0]
         
         response = flask.jsonify({'status': 200, 'results': f'{response}'}), 200
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        logger.error(f'PUT /user - error: {error}')
+        response = flask.jsonify({'status': 500, 'errors': str(error)}), 500
+
+        # an error occurred, rollback
+        conn.rollback()
+
+    finally:
+        if conn is not None:
+            conn.close()
+
+    return response
+
+
+    logger.info('POST /subscription')
+    payload = flask.request.get_json()
+    logger.debug(f'POST /subscription - param: {payload}')
+
+    conn = db_connection()
+    cur = conn.cursor()
+
+    if 'period' not in payload or payload['period'].upper() not in ['MONTH', 'QUARTER', 'SEMESTER']:
+        return flask.jsonify({'status': 400, 'errors': 'Missing period'}), 400
+    if 'cards' not in payload or len(payload['cards']) < 1:
+        return flask.jsonify({'status': 400, 'errors': 'Missing cards'}), 400
+    if 'COSTUMER' != role:
+        return flask.jsonify({'status': 403, 'errors': 'Forbidden'}), 403
+
+    try:
+        interval = 0
+        if(payload['period'].upper() == 'MONTH'):
+            interval = '1 month'
+        elif(payload['period'].upper() == 'QUARTER'):
+            interval = '3 month'
+        elif(payload['period'].upper() == 'SEMESTER'):
+            interval = '6 month'
+
+        #! change to procedure
+        statement = f"SELECT id, price FROM plan WHERE duration = '{payload['period'].upper()}' AND active = TRUE"
+        values = [payload['period'].upper()]
+        cur.execute(statement, values)
+        response = cur.fetchall()
+        print(response)
+
+        if len(response) != 1:
+            return flask.jsonify({'status': 400, 'errors': 'No plan found'}), 400
+        plan_id = response[0][0]
+        price = response[0][1]  
+        cards_ids = str(payload['cards']).replace('[', '(').replace(']', ')')
+
+        statement = f'UPDATE pay_card SET customer_id = %s WHERE customer_id IS NULL AND id IN {cards_ids}'
+        values = [id]
+        cur.execute(statement, values)
+
+        statement = f'SELECT id, ammount_left FROM pay_card WHERE customer_id IS NOT NULL AND customer_id = {id} AND ammount_left > 0 AND limit_date > NOW() AND id IN {cards_ids}'
+        cur.execute(statement)
+        cards = cur.fetchall()
+
+        if len(cards) != len(payload['cards']):
+            return flask.jsonify({'status': 400, 'errors': 'Invalid cards inserted'}), 400
+
+        sum = 0
+        for card in cards:
+            sum += card[1]
+        print(sum, price, "HERE")
+        if sum < price:
+            return flask.jsonify({'status': 400, 'errors': 'Insufficient balance in the cards'}), 400
+        
+        statement = f'SELECT id, ammount_left FROM pay_card WHERE customer_id IS NOT NULL AND customer_id = {id} AND ammount_left > 0 AND limit_date > NOW() AND id IN {cards_ids}'
+        cur.execute(statement)
+        cards = cur.fetchall()
+
+        statement = 'INSERT INTO subscription (movement_date, plan_id, consumer_id) VALUES (NOW(), %s, %s) RETURNING id'
+        values = [plan_id, id]
+        cur.execute(statement, values)
+        sub_id = cur.fetchone()[0]
+
+        statement = f'''
+                    DO $$
+                    DECLARE 
+                        left_pay INT := {price};
+                        spent INT := 0;
+                        c1 cursor FOR 
+                        SELECT id, ammount_left 
+                        FROM pay_card 
+                        WHERE customer_id IS NOT NULL AND customer_id = {id} 
+                        AND ammount_left > 0 
+                        AND limit_date > NOW() 
+                        AND id IN {cards_ids};
+                    BEGIN
+                    FOR card IN c1
+                        LOOP
+                            IF card.ammount_left >= left_pay THEN
+                                spent := left_pay;
+                                UPDATE pay_card SET ammount_left = card.ammount_left-left_pay WHERE id = card.id;
+                                left_pay := 0;
+                                INSERT INTO subscription_ACTIVITY (subscription_id, pay_card_id, ammount) 
+                                VALUES ({sub_id}, card.id, spent);
+                                EXIT;
+                            ELSE
+                                spent := card.ammount_left;
+                                left_pay := left_pay - card.ammount_left;
+                                UPDATE pay_card SET ammount_left = 0 WHERE id = card.id;
+                                INSERT INTO subscription_ACTIVITY (subscription_id, pay_card_id, ammount) 
+                                VALUES ({sub_id}, card.id, spent);
+                            END IF;
+                        END LOOP;
+                    END $$;'''
+        cur.execute(statement)
+
+        statement = '''
+                    UPDATE consumer 
+                    SET expire_date =
+                        CASE WHEN expire_date < NOW() THEN NOW() +  INTERVAL %s ELSE expire_date +  INTERVAL %s END
+                        WHERE login_id = %s
+                    '''
+        values = [interval, interval, id]
+        cur.execute(statement, values)        
+
+        conn.commit()
+        
+        response = flask.jsonify({'status': 200, 'results': f'{sub_id}'}), 200
 
     except (Exception, psycopg2.DatabaseError) as error:
         logger.error(f'PUT /user - error: {error}')

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<indexing>
+ <object alt="" name="Imagem 1" object_type="graphic"/>
+ <paragraph index="9" node_type="writer">$sudo apt update</paragraph>
+ <paragraph index="10" node_type="writer">$ sudo apt install postgresql</paragraph>
+ <paragraph index="11" node_type="writer">$ sudo apt install pgadmin4</paragraph>
+ <object alt="" name="Imagem 3" object_type="graphic"/>
+ <object alt="" name="Imagem 4" object_type="graphic"/>
+ <object alt="" name="Image1" object_type="graphic"/>
+ <paragraph index="29" node_type="writer">Projeto de Base de Dados</paragraph>
+ <paragraph index="30" node_type="writer">LEI 2022/2023</paragraph>
+ <paragraph index="43" node_type="writer">Realizado por:</paragraph>
+ <paragraph index="45" node_type="writer">Frederico Ferreira - 2021217116</paragraph>
+ <paragraph index="46" node_type="writer">Gonçalo Monteiro - 2021217127</paragraph>
+ <paragraph index="47" node_type="writer">Guilherme Almeida - 2019224555</paragraph>
+ <paragraph index="48" node_type="writer">Introduction</paragraph>
+ <paragraph index="50" node_type="writer">The following project was developed with the main objective to create a database and it’s respective API, to manage a music streaming platform like the users, songs and subscription plans.</paragraph>
+ <paragraph index="51" node_type="writer">To do this we used PostgreSQL and pgAdmin to manage the database and Python to develop the REST API, using the flask library.</paragraph>
+ <paragraph index="53" node_type="writer">Installation Manual</paragraph>
+ <paragraph index="56" node_type="writer">1.1 Pre-installation Steps DB:</paragraph>
+ <paragraph index="57" node_type="writer">     </paragraph>
+ <paragraph index="58" node_type="writer">If PostgreSQL is not already installed, follow the instructions below to install it:</paragraph>
+ <paragraph index="59" node_type="writer">For Windows:</paragraph>
+ <paragraph index="60" node_type="writer">Download the PostgreSQL installer from the official website: https://www.postgresql.org/download/windows/</paragraph>
+ <paragraph index="61" node_type="writer">Run the installer and follow the on-screen instructions.</paragraph>
+ <paragraph index="62" node_type="writer">Choose the desired installation location and components (including pgAdmin).</paragraph>
+ <paragraph index="63" node_type="writer">Complete the installation process.</paragraph>
+ <paragraph index="64" node_type="writer">For Ubuntu:</paragraph>
+ <paragraph index="65" node_type="writer">Open a terminal.</paragraph>
+ <paragraph index="66" node_type="writer">Execute the following commands:</paragraph>
+ <paragraph index="71" node_type="writer">For macOS:</paragraph>
+ <paragraph index="72" node_type="writer">Download the PostgreSQL installer for macOS from the official website: https://www.postgresql.org/download/macosx/</paragraph>
+ <paragraph index="73" node_type="writer">Run the installer and follow the on-screen instructions.</paragraph>
+ <paragraph index="74" node_type="writer">Choose the desired installation location and components (including pgAdmin).</paragraph>
+ <paragraph index="75" node_type="writer">Complete the installation process.</paragraph>
+ <paragraph index="77" node_type="writer">   1.2 Database Setup:</paragraph>
+ <paragraph index="78" node_type="writer">     </paragraph>
+ <paragraph index="79" node_type="writer">Once PostgreSQL is installed, open pgAdmin to manage the database.</paragraph>
+ <paragraph index="80" node_type="writer">Create new user if needed.</paragraph>
+ <paragraph index="81" node_type="writer">Create a new PostgreSQL database:</paragraph>
+ <paragraph index="82" node_type="writer">Launch pgAdmin.</paragraph>
+ <paragraph index="83" node_type="writer">Connect to the PostgreSQL server using the appropriate credentials.</paragraph>
+ <paragraph index="84" node_type="writer">Right-click on the &quot;Databases&quot; node and select &quot;Create&quot; &gt; &quot;Database&quot;.</paragraph>
+ <paragraph index="85" node_type="writer">Enter a name for the database and click &quot;Save&quot;.</paragraph>
+ <paragraph index="86" node_type="writer">After creating the database the user and defining the IP and the port store all of this values in a .env file with the following format:</paragraph>
+ <paragraph index="93" node_type="writer">1.3 Table Creation and Population:</paragraph>
+ <paragraph index="94" node_type="writer">     </paragraph>
+ <paragraph index="95" node_type="writer">Use the provided script &quot;create_tables.sql&quot; for this step.</paragraph>
+ <paragraph index="96" node_type="writer">Execute the SQL script using the following steps:</paragraph>
+ <paragraph index="97" node_type="writer">Open pgAdmin and connect to the database created in the previous step.</paragraph>
+ <paragraph index="98" node_type="writer">Right-click on the database and select &quot;Query Tool&quot;.</paragraph>
+ <paragraph index="99" node_type="writer">Open the SQL script &quot;create_tables.sql&quot; in the query editor.</paragraph>
+ <paragraph index="100" node_type="writer">Execute the script by clicking the &quot;Execute&quot; button or using the appropriate shortcut.</paragraph>
+ <paragraph index="102" node_type="writer">2 Installation Process API</paragraph>
+ <paragraph index="104" node_type="writer">2.1 Environment Setup:</paragraph>
+ <paragraph index="106" node_type="writer">Ensure that you have Python installed on your system. You can download Python from the official website: https://www.python.org/downloads/</paragraph>
+ <paragraph index="107" node_type="writer">Verify that pip, the package installer for Python, is also installed. You can check if pip is installed by running the following command in your terminal:</paragraph>
+ <paragraph index="108" node_type="writer">$ pip --version</paragraph>
+ <paragraph index="109" node_type="writer">If pip is not installed, you can install it by following the instructions provided on the official Python website.</paragraph>
+ <paragraph index="115" node_type="writer">2.3 Install Dependencies:</paragraph>
+ <paragraph index="117" node_type="writer">Open your terminal, navigate to the project directory, and execute the following command to install the required dependencies:</paragraph>
+ <paragraph index="118" node_type="writer">$ pip install -r requirements.txt</paragraph>
+ <paragraph index="119" node_type="writer">This command will install all the dependencies listed in the requirements.txt file.</paragraph>
+ <paragraph index="120" node_type="writer">Make sure the .env referred above is created as instructed.</paragraph>
+ <paragraph index="121" node_type="writer">Open your terminal, navigate to the project directory, and execute the following command to start the Flask development server:</paragraph>
+ <paragraph index="122" node_type="writer">$ python bdproj.py</paragraph>
+ <paragraph index="123" node_type="writer">The Flask development server will start, and your REST API will be accessible at the specified URL (e.g., http://localhost:8080/).</paragraph>
+ <paragraph index="142" node_type="writer">User’s Manual</paragraph>
+ <paragraph index="144" node_type="writer">	To test this application, after following the installation manual it is possible to use the API.</paragraph>
+ <paragraph index="145" node_type="writer">	To test the API a postman JSON was provided with an example for all of the endpoints, every endpoint except for the login and the register requires the use of a token acquired by logging in with an account with the correct permissions.</paragraph>
+ <paragraph index="146" node_type="writer">	This token should be passed in the header with the name “Authorization”</paragraph>
+ <paragraph index="148" node_type="writer">Diagram</paragraph>
+ <paragraph index="150" node_type="writer">	In order to produce the database the tool ONDA, found in https://onda.dei.uc.pt/v4/ was used, the following ER diagram was used as a structure for the database:</paragraph>
+ <paragraph index="158" node_type="writer">	This ER resulted in the following physical diagram:</paragraph>
+ <paragraph index="160" node_type="writer">	Despite ONDA providing us with functional SQL code for the table creation some changes were made, such as removing the comment_comment table and substituting it by an attribute comment_id in the table comment which is a foreign key of the own table.</paragraph>
+ <paragraph index="161" node_type="writer">	The ENUM type is used for the different types of roles, types of subscription plans and values for the pay cards.</paragraph>
+ <paragraph index="169" node_type="writer">Development Plan</paragraph>
+ <paragraph index="171" node_type="writer">ER Diagram construction and SQL script correction: 8.5 h</paragraph>
+ <paragraph index="172" node_type="writer">Frederico: 4 h</paragraph>
+ <paragraph index="173" node_type="writer">Gonçalo: 2 h</paragraph>
+ <paragraph index="174" node_type="writer">Guilherme: 3.5 h</paragraph>
+ <paragraph index="176" node_type="writer">Project setup and research: 2 h</paragraph>
+ <paragraph index="177" node_type="writer">Frederico: 2 h</paragraph>
+ <paragraph index="178" node_type="writer">Gonçalo: 2 h</paragraph>
+ <paragraph index="179" node_type="writer">Guilherme: 2 h</paragraph>
+ <paragraph index="181" node_type="writer">Endpoints development: 20 h</paragraph>
+ <paragraph index="182" node_type="writer">Frederico: 15 h</paragraph>
+ <paragraph index="183" node_type="writer">Gonçalo: 10 h</paragraph>
+ <paragraph index="184" node_type="writer">Guilherme: 10 h</paragraph>
+ <paragraph index="186" node_type="writer">Trigger implementation: 3 h</paragraph>
+ <paragraph index="187" node_type="writer">Goncalo: 3 h</paragraph>
+ <paragraph index="200" node_type="writer">Extra Information</paragraph>
+ <paragraph index="201" node_type="writer">	</paragraph>
+ <paragraph index="202" node_type="writer">	To test this database and use our PL/pgSQL knowledge we used psycopg2 which allows us to query directly the database using python variables as values for the queries, all the endpoints where build with performance in mind making the minimum amount of queries while keeping all the process safe and bug free, in order to achieve better performance some level of redundancy was added to the database, one such example would the be the addition of the column “user_privilege” in the login table, allowing us to know the role of one user with only one query instead of three. This was also done as explained above in in the comment_comment table.</paragraph>
+ <paragraph index="203" node_type="writer">	To validate if a user has logged in we used a jwt token and stored inside of it the of the user and its role which allows the user to using only the token access to all the endpoints that it has access to.</paragraph>
+ <object name="Caixa de Texto 2" alt="" object_type="shape" description=""/>
+</indexing>
